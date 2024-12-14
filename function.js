@@ -427,16 +427,18 @@ function mostrarPromedio() {
     // Mostrar resultado
     document.getElementById('valorDesviacionEstandar').textContent = desviacionEstandar;
     document.getElementById('tabladesvi').style.display = "table";
+   }
+
     //aqui es la orta tabla------------------------------------------------------------------------------------------------
     
     
     function mostrarPromedio2() {
-        const filas = document.getElementById('tabla-frecuencia-muestra-edad').querySelectorAll('tbody tr');
+        const filas = document.getElementById('tabla-muestra-edad').querySelectorAll('tbody tr');
         let suma = 0;
         let total = 0;
       
         filas.forEach(fila => {
-          const edadCelda = fila.querySelector('.edad');
+          const edadCelda = fila.querySelector('.promedio');
           if (edadCelda) {
             const edad = parseInt(edadCelda.textContent);
             if (!isNaN(edad)) {
@@ -449,17 +451,17 @@ function mostrarPromedio() {
         var promedio = total > 0 ? (suma / total).toFixed(2) : 0;
         suma = 0;
         total = 0;
-        document.getElementById('valorPromedio').textContent = promedio;
-        document.getElementById('tablaPromedio').style.display = "table";
+        document.getElementById('valorPromedio2').textContent = promedio;
+        document.getElementById('tablaPromediosssss').style.display = "table";
       }
       
       function mostrarPromedioestatura2() {
-        const filas = document.getElementById('tabla-frecuencia-muestra-edad').querySelectorAll('tbody tr');
+        const filas = document.getElementById('tabla-muestra-estatura').querySelectorAll('tbody tr');
         let suma = 0;
         let total = 0;
       
         filas.forEach(fila => {
-          const estaturaCelda = fila.querySelector('.estatura'); 
+          const estaturaCelda = fila.querySelector('.promedio'); 
           if (estaturaCelda) {
             const estatura = parseInt(estaturaCelda.textContent);
             if (!isNaN(estatura)) {
@@ -472,19 +474,19 @@ function mostrarPromedio() {
         var promedio = total > 0 ? (suma / total).toFixed(2) : 0;
         suma = 0;
         total = 0;
-        document.getElementById('valorPromedioesta').textContent = promedio;
-        document.getElementById('tablita').style.display = "table";
+        document.getElementById('valorPromedioesta2').textContent = promedio;
+        document.getElementById('tablitaaaaaa').style.display = "table";
       }
     
     
     
       function mostrarPromediogasto2() {
-        const filas = document.getElementById('tabla-frecuencia-muestra-edad').querySelectorAll('tbody tr');
+        const filas = document.getElementById('tabla-muestra-gasto').querySelectorAll('tbody tr');
         let suma = 0;
         let total = 0;
       
         filas.forEach(fila => {
-          const gastoCelda = fila.querySelector('.gasto'); 
+          const gastoCelda = fila.querySelector('.promedio'); 
           if (gastoCelda) {
             const gasto = parseInt(gastoCelda.textContent);
             if (!isNaN(gasto)) {
@@ -497,7 +499,80 @@ function mostrarPromedio() {
         var promedio = total > 0 ? (suma / total).toFixed(2) : 0;
         suma = 0;
         total = 0;
-        document.getElementById('valorPromediogasto').textContent = promedio;
-        document.getElementById('tablita2').style.display = "table";
+        document.getElementById('valorPromediogasto2').textContent = promedio;
+        document.getElementById('tablitasssss').style.display = "table";
       }
-  }
+  
+
+
+
+
+
+
+
+
+
+
+      function mostrarDesviacionEstandar2() {
+        const filas = document.getElementById('tabla-principal').querySelectorAll('tbody tr');
+        let suma = 0;
+        let total = 0;
+        const valores = [];
+        
+        filas.forEach(fila => {
+          const edadCelda = fila.querySelector('.estatura');
+          if (edadCelda) {
+            const edad = parseInt(edadCelda.textContent);
+            if (!isNaN(edad)) {
+              valores.push(edad);
+              suma += edad;
+              total++;
+            }
+          }
+        });
+        const promedio = total > 0 ? (suma / total).toFixed(2) : 0;
+      
+        // Calcular la desviación estándar
+        const varianza = valores.reduce((acc, val) => acc + (val - promedio) ** 2, 0) / (total > 1 ? total - 1 : 1);
+        const desviacionEstandar = Math.sqrt(varianza).toFixed(2);
+        console.log(desviacionEstandar);
+        // Mostrar resultado
+        document.getElementById('valorDesviacionEstandar2').textContent = desviacionEstandar;
+        document.getElementById('tabladesvi2').style.display = "table";
+       }
+
+
+
+
+       function mostrarDesviacionEstandar3() {
+        const filas = document.getElementById('tabla-principal').querySelectorAll('tbody tr');
+        let suma = 0;
+        let total = 0;
+        const valores = [];
+        
+        filas.forEach(fila => {
+          const edadCelda = fila.querySelector('.gasto');
+          if (edadCelda) {
+            const edad = parseInt(edadCelda.textContent);
+            if (!isNaN(edad)) {
+              valores.push(edad);
+              suma += edad;
+              total++;
+            }
+          }
+        });
+        const promedio = total > 0 ? (suma / total).toFixed(2) : 0;
+      
+        // Calcular la desviación estándar
+        const varianza = valores.reduce((acc, val) => acc + (val - promedio) ** 2, 0) / (total > 1 ? total - 1 : 1);
+        const desviacionEstandar = Math.sqrt(varianza).toFixed(2);
+        console.log(desviacionEstandar);
+        // Mostrar resultado
+        document.getElementById('valorDesviacionEstandar3').textContent = desviacionEstandar;
+        document.getElementById('tabladesvi3').style.display = "table";
+       }
+
+
+
+
+
