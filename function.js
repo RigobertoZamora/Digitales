@@ -1,5 +1,6 @@
 const frecuenciasEdad = [], frecuenciaEstatura=[], frecuenciaGasto=[], Nedades=[], Nestaturas=[], Ngastos=[], NMedades=[], NMestaturas=[], NMgastos=[];
 const promedioEdad = [], promedioEstatura=[], promedioGasto=[], frecuenciasMEdad = [], frecuenciasMGasto = [], frecuenciasMEstatura = [];
+var desviacionEstandar1, desviacionEstandar2, desviacionEstandar3;
 //Código para importar los datos de el archivo fijo de texto
 document.getElementById('fileInput').addEventListener('change', function(event) {
     const file = event.target.files[0];
@@ -401,33 +402,6 @@ function mostrarPromedio() {
     document.getElementById('tablita2').style.display = "table";
   }
 
-  function mostrarDesviacionEstandar() {
-    const filas = document.getElementById('tabla-principal').querySelectorAll('tbody tr');
-    let suma = 0;
-    let total = 0;
-    const valores = [];
-    
-    filas.forEach(fila => {
-      const edadCelda = fila.querySelector('.edad');
-      if (edadCelda) {
-        const edad = parseInt(edadCelda.textContent);
-        if (!isNaN(edad)) {
-          valores.push(edad);
-          suma += edad;
-          total++;
-        }
-      }
-    });
-    const promedio = total > 0 ? (suma / total).toFixed(2) : 0;
-  
-    // Calcular la desviación estándar
-    const varianza = valores.reduce((acc, val) => acc + (val - promedio) ** 2, 0) / (total > 1 ? total - 1 : 1);
-    const desviacionEstandar = Math.sqrt(varianza).toFixed(2);
-    console.log(desviacionEstandar);
-    // Mostrar resultado
-    document.getElementById('valorDesviacionEstandar').textContent = desviacionEstandar;
-    document.getElementById('tabladesvi').style.display = "table";
-   }
 
     //aqui es la orta tabla------------------------------------------------------------------------------------------------
     
@@ -504,14 +478,62 @@ function mostrarPromedio() {
       }
   
 
-
-
-
-
-
-
-
-
+      function mostrarDesviacionEstandar() {
+        const filas = document.getElementById('tabla-principal').querySelectorAll('tbody tr');
+        let suma = 0;
+        let total = 0;
+        const valores = [];
+        
+        filas.forEach(fila => {
+          const edadCelda = fila.querySelector('.edad');
+          if (edadCelda) {
+            const edad = parseInt(edadCelda.textContent);
+            if (!isNaN(edad)) {
+              valores.push(edad);
+              suma += edad;
+              total++;
+            }
+          }
+        });
+        const promedio = total > 0 ? (suma / total).toFixed(2) : 0;
+      
+        // Calcular la desviación estándar
+        const varianza = valores.reduce((acc, val) => acc + (val - promedio) ** 2, 0) / (total > 1 ? total - 1 : 1);
+        const desviacionEstandar = Math.sqrt(varianza).toFixed(2);
+        console.log(desviacionEstandar);
+        // Mostrar resultado
+        document.getElementById('valorDesviacionEstandar').textContent = desviacionEstandar;
+        document.getElementById('tabladesvi').style.display = "table";
+          function mostrarDesviacionEstandar() {
+                const filas = document.getElementById('tabla-principal').querySelectorAll('tbody tr');
+                let suma = 0;
+                let total = 0;
+                const valores = [];
+                
+                filas.forEach(fila => {
+                const edadCelda = fila.querySelector('.edad');
+                if (edadCelda) {
+                    const edad = parseInt(edadCelda.textContent);
+                    if (!isNaN(edad)) {
+                    valores.push(edad);
+                    suma += edad;
+                    total++;
+                    }
+                }
+                });
+                const promedio = total > 0 ? (suma / total).toFixed(2) : 0;
+            
+                // Calcular la desviación estándar
+                const varianza = valores.reduce((acc, val) => acc + (val - promedio) ** 2, 0) / (total > 1 ? total - 1 : 1);
+                const desviacionEstandar = Math.sqrt(varianza).toFixed(2);
+                console.log(desviacionEstandar);
+                // Mostrar resultado
+                document.getElementById('valorDesviacionEstandar').textContent = desviacionEstandar;
+                document.getElementById('tabladesvi').style.display = "table";
+            }
+            desviacionEstandar1 = desviacionEstandar;
+        }
+    
 
       function mostrarDesviacionEstandar2() {
         const filas = document.getElementById('tabla-principal').querySelectorAll('tbody tr');
@@ -539,6 +561,7 @@ function mostrarPromedio() {
         // Mostrar resultado
         document.getElementById('valorDesviacionEstandar2').textContent = desviacionEstandar;
         document.getElementById('tabladesvi2').style.display = "table";
+        desviacionEstandar2 = desviacionEstandar;
        }
 
 
@@ -570,9 +593,36 @@ function mostrarPromedio() {
         // Mostrar resultado
         document.getElementById('valorDesviacionEstandar3').textContent = desviacionEstandar;
         document.getElementById('tabladesvi3').style.display = "table";
+        desviacionEstandar3 = desviacionEstandar;
        }
 
 
+///DESVIACIONES ESTANDAR PARA LAS MUESTRAS
 
+       function mostrarDesviacionEstandar4() {
+        const n = promedioEdad.length;
+        const desviacionEstandar = desviacionEstandar1 / Math.sqrt(n);
+        // Mostrar resultado
+        document.getElementById('valorDesviacionEstandar4').textContent = desviacionEstandar;
+        document.getElementById('tabladesvi4').style.display = "table";
+       }
 
+       function mostrarDesviacionEstandar5() {
+        const n = promedioEdad.length;
+        console.log(n);
+        const desviacionEstandar = desviacionEstandar2 / Math.sqrt(n);
+        // Mostrar resultado
+        document.getElementById('valorDesviacionEstandar5').textContent = desviacionEstandar;
+        document.getElementById('tabladesvi5').style.display = "table";
+        
+       }
 
+       function mostrarDesviacionEstandar6() {
+        const n = promedioEdad.length;
+        const desviacionEstandar = desviacionEstandar3 / Math.sqrt(n);
+        // Mostrar resultado
+        document.getElementById('valorDesviacionEstandar6').textContent = desviacionEstandar;
+        document.getElementById('tabladesvi6').style.display = "table";
+       }
+
+       

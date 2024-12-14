@@ -58,6 +58,16 @@
                 <button class="shadow__btn" onclick="agregarFila()">Agregar Fila</button>
               </div>
 
+
+
+<table>
+
+<th>
+  
+
+  
+
+
               <button class="shadow__btn"id="botonPromedio" onclick="mostrarDesviacionEstandar()">Mostrar Desviacion Estandar</button>
               <table id="tabladesvi" style="display: none; margin-top: 5px;">
                 <tr>
@@ -70,6 +80,9 @@
                 </tr>
                </table>
 
+</th>
+
+<th>
                <button class="shadow__btn"id="botonPromedio" onclick="mostrarDesviacionEstandar2()">Mostrar Desviacion Estandar</button>
               <table id="tabladesvi2" style="display: none; margin-top: 5px;">
                 <tr>
@@ -82,6 +95,10 @@
                 </tr>
                </table>
 
+</th>
+<th>
+
+               
                <button class="shadow__btn"id="botonPromedio" onclick="mostrarDesviacionEstandar3()">Mostrar Desviacion Estandar</button>
               <table id="tabladesvi3" style="display: none; margin-top: 5px;">
                 <tr>
@@ -94,12 +111,21 @@
                 </tr>
                </table>
 
+
+</th>
+
+              </table>
+
+
+
+
+
+
+
+
               <table>
 
               <th>
-
-
-
               <button class="shadow__btn"id="botonPromedio" onclick="mostrarPromedio()">Mostrar Promedio edad</button>
               <table id="tablaPromedio" style="display: none; margin-top: 5px;">
                 <tr>
@@ -231,72 +257,120 @@
 
 
 
-               
+               <table>
+              <th>
+                <div class="control-container">
+                                <button class="shadow__btn"onclick="muestreo(0)">Generar muestras y gráfico de edad</button>
+                              </div>
+              </th>
+                            
+
+                              <th>
+              <div class="control-container">
+                                <button class="shadow__btn"onclick="muestreo(1)">Generar muestras y gráfico de estatura</button>
+                              </div>
+
+                              </th>
+              <th>
 
                 <div class="control-container">
-                  <button class="shadow__btn"onclick="muestreo(0)">Generar muestras y gráfico de edad</button>
-                </div>
-                <div class="control-container">
-                  <button class="shadow__btn"onclick="muestreo(1)">Generar muestras y gráfico de estatura</button>
-                </div>
-                <div class="control-container">
-                  <button class="shadow__btn"onclick="muestreo(2)">Generar muestras y gráfico de gasto</button>
-                </div>
-
-
-
-
-
-                <button class="shadow__btn"id="botonPromedio" onclick="mostrarPromedio2()">Mostrar Promedio muestra edad</button>
-              <table id="tablaPromediosssss" style="display: none; margin-top: 5px;">
-                <tr>
-                  <th>Promedio</th>
-                  <th>Años</th>
-                </tr>
-                <tr id="filaPromedio">
-                  <td>Promedio muestral de edades</td>
-                  <td id="valorPromedio2"></td>
-                </tr>
+                                <button class="shadow__btn"onclick="muestreo(2)">Generar muestras y gráfico de gasto</button>
+                              </div>
+              </th>
                </table>
 
 
 
-               <button class="shadow__btn"id="botonPromedio" onclick="mostrarPromedioestatura2()">Mostrar Promedio muestra estatura</button>
-               <table id="tablitaaaaaa" style="display: none; margin-top: 5px;">
-                 <tr>
-                   <th>Promedio</th>
-                   <th>Estatura</th>
-                 </tr>
-                 <tr id="filaPromedio">
-                   <td>Promedio muestral de estatura</td>
-                   <td id="valorPromedioesta2"></td>
-                 </tr>
-                </table>
+              <table>
 
+              <th>
+                <button class="shadow__btn"id="botonPromedio" onclick="mostrarPromedio2()">Mostrar Promedio muestra edad</button>
+                            <table id="tablaPromediosssss" style="display: none; margin-top: 5px;">
+                              <tr>
+                                <th>Promedio</th>
+                                <th>Años</th>
+                              </tr>
+                              <tr id="filaPromedio">
+                                <td>Promedio muestral de edades</td>
+                                <td id="valorPromedio2"></td>
+                              </tr>
+                            </table>
+              </th>
+              <th>
+              <button class="shadow__btn"id="botonPromedio" onclick="mostrarPromedioestatura2()">Mostrar Promedio muestra estatura</button>
+                            <table id="tablitaaaaaa" style="display: none; margin-top: 5px;">
+                              <tr>
+                                <th>Promedio</th>
+                                <th>Estatura</th>
+                              </tr>
+                              <tr id="filaPromedio">
+                                <td>Promedio muestral de estatura</td>
+                                <td id="valorPromedioesta2"></td>
+                              </tr>
+                              </table>
 
-
+              </th>
+              <th>
                 <button class="shadow__btn"id="botonPromedio" onclick="mostrarPromediogasto2()">Mostrar Promedio muestra gasto</button>
-                <table id="tablitasssss" style="display: none; margin-top: 5px;">
+                              <table id="tablitasssss" style="display: none; margin-top: 5px;">
+                                <tr>
+                                  <th>Promedio</th>
+                                  <th>Gasto</th>
+                                </tr>
+                                <tr id="filaPromedio">
+                                  <td>Promedio muestral de gasto</td>
+                                  <td id="valorPromediogasto2"></td>
+                                </tr>
+                              </table>
+              </th>
+        </table>
+
+                <table>
+               <th>
+                <button class="shadow__btn"id="botonPromedio" onclick="mostrarDesviacionEstandar4()">Mostrar Desviacion Estandar</button>
+                <table id="tabladesvi4" style="display: none; margin-top: 5px;">
                   <tr>
-                    <th>Promedio</th>
-                    <th>Gasto</th>
+                    <th>Desviacion Estandar</th>
+                    <th>Valor:</th>
                   </tr>
-                  <tr id="filaPromedio">
-                    <td>Promedio muestral de gasto</td>
-                    <td id="valorPromediogasto2"></td>
+                  <tr id="filadesvi">
+                    <td>Desviacion Estandar</td>
+                    <td id="valorDesviacionEstandar4"></td>
                   </tr>
-                </table>
+                 </table>
+               </th>     
+               <th>
+                <button class="shadow__btn"id="botonPromedio" onclick="mostrarDesviacionEstandar5()">Mostrar Desviacion Estandar</button>
+                 <table id="tabladesvi5" style="display: none; margin-top: 5px;">
+                   <tr>
+                     <th>Desviacion Estandar</th>
+                     <th>Valor:</th>
+                   </tr>
+                   <tr id="filadesvi">
+                     <td>Desviacion Estandar</td>
+                     <td id="valorDesviacionEstandar5"></td>
+                   </tr>
+                  </table>
+
+               </th>  
+                  <th>
+                    <button class="shadow__btn"id="botonPromedio" onclick="mostrarDesviacionEstandar6()">Mostrar Desviacion Estandar</button>
+                  <table id="tabladesvi6" style="display: none; margin-top: 5px;">
+                    <tr>
+                      <th>Desviacion Estandar</th>
+                      <th>Valor:</th>
+                    </tr>
+                    <tr id="filadesvi">
+                      <td>Desviacion Estandar</td>
+                      <td id="valorDesviacionEstandar6"></td>
+                    </tr>
+                   </table>
+                  </th>
+                  </table>
 
 
-
-
-
-
-               
 
          <table>
-
-
             <th class="aaaa">
                 <table class="table" id="tabla-muestra-edad">
                   <thead>
@@ -436,7 +510,7 @@
           <!-- Las barras del histograma se agregarán dinámicamente aquí--> </div>
 
           
-        <div class="histogram" id="histograma-gasto">
+          <div class="histogram" id="histograma-gasto">
           <!-- Las barras del histograma se agregarán dinámicamente aquí --></div>
 
           <div class="histogram" id="histograma-muestra-edad">
@@ -450,44 +524,9 @@
             <!-- Las barras del histograma se agregarán dinámicamente aquí --></div>
 
         <script src="function.js"></script>
-        <!--
-        <table class="table" id="tabla-principal">  
-            <thead>
-              <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Edad</th>
-                <th scope="col">Estatura</th>
-                <th scope="col">Gasto</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td class="edad">40</td>
-                <td class="estatura">162</td>
-                <td class="gasto">286</td>
-              </tr>
-              <!--Se añade lo dramático
-            </tbody>
-          </table>
-        </div>
-          <button onclick="expand()">Mostrar gráfica</button> 
-        </div>
-        <div class="input-container">
-          <input type="text" id="col2" placeholder="Estatura">
-          <input type="text" id="col3" placeholder="Edad">
-          <input type="text" id="col4" placeholder="Gasto">
-          <button onclick="agregarFila()">Agregar Fila</button>
-        </div>
-        <p class="error" id="error"></p>
-        <div class="histogram" id="histograma-edad">
-          <!-- Las barras del histograma se agregarán dinámicamente aquí 
-        </div>
-        <div class="histogram" id="histograma-estatura">
-          <!-- Las barras del histograma se agregarán dinámicamente aquí </div>
-        <div class="histogram" id="histograma-gasto">
-           <!-- Las barras del histograma se agregarán dinámicamente aquí </div>
-          -->
+
            <script src="function.js"></script>
     </body>
 </html>
+
+
