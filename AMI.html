@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CODIFICACIONES</title>
+  <link href="style.css" rel="stylesheet">
+  <link rel="icon" type="image/png" href="img/itcolima.svg">
+</head>
+<body id="body">
+  <div id="textoInicial">
+    <div>
+      <img src="img/tecnm.png" alt="Imagen" class="logomexico">
+    </div>
+    <div>
+      <h2>Tecnológico Nacional de México Campus Colima Ingeniería Informática Tarea 3UA1.</h2> 
+    </div>
+    <div>
+      <img src="img/itcolima.svg" alt="Imagen" class="logocolima">  
+    </div>
+  </div>
+  <div id="titulo">
+    <h2>CODIFICACIÓN AMI (Alternate Mark Inversion)</h2> 
+  </div>
+  <div class="container">
+
+    <!-- Entrada de bits -->
+    <input type="text" id="inputBit" placeholder="Ingresa una cadena de bits" maxlength="64">
+    <p id="mensajeError" style="color: red;"></p>
+    <button onclick="IngresarBits('ami')">Generar Grafica</button>
+    <button onclick="generarRandom('ami')">Generar Grafica Aleatoria</button>
+
+    <!-- Contenedor para desplazamiento -->
+    <div class="scroll-container">
+      <canvas id="grafica"></canvas>
+    </div>
+  </div>
+  <script src="function.js"></script>
+</body>
+</html>

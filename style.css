@@ -41,8 +41,18 @@
     width: 90px;  
     margin-right: 20px;
   }
+  .tecno{
+    width: 503px;  
+    opacity: 0.8;
+    animation: pulso 1s infinite alternate ease-in-out;
+  }
+  .tdimg
+  {
+    width: 360px;  
+    
+  }
   .navbar {
-    background-color: #333;
+    background-color: #2735ff;
     color: rgb(255, 255, 255);
     text-align: center;
     font-size: 24px;
@@ -51,10 +61,16 @@
     border-bottom: 7px solid rgb(2, 9, 89);
     clip-path: polygon(0% 0%, 100% 0%, 99% 50%, 100% 100%, 0% 100%, 1% 50%);
     position: fixed;
-    width: 99%;
+    width: 99.4%;
     bottom: 0px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-
+#textonav{ 
+  animation: pulso2 3s infinite alternate ease-in-out;
+}
 #btn{
     width: 50px; 
     height: 40px; 
@@ -66,132 +82,256 @@
 }
 table
 {
-
- border:7px solid #0091f2;
- width: 99%;
+ width: 102%;
  height: 400px; 
- background-color: aliceblue;
+ 
 }
 h1{
-  color: rgb(0, 0, 0);
+  color: rgb(64, 0, 255);
  }
 
-
-/* PROYECTO ANTERIOR
-#textoInicial
-{
-    padding-left: 0px;
-    background-color: rgb(0, 84, 153);
-    text-align: center;
-    color: rgb(14, 14, 21);
-    margin: 0;
-    padding: 0;
-    font-family: cursive;
+ @keyframes pulso {
+  0% {
+      filter:  brightness(.6);
+     
+  }
+  50% {
+      filter: brightness(.9); /* Efecto azul */
+  }
+  100% {
+      filter: brightness(.9);
+  }
+}
+@keyframes pulso2 {
+  0% {
+      filter:  brightness(1);
+      transform: scale(1);
+      color: #000000;
+  }
+  50% {
+      filter:  brightness(1.2); /* Efecto azul */
+      transform: scale(1.012); /* Pequeño zoom */
+      color: #807d7d;
+  }
+  100% {
+      filter:  brightness(1);
+      transform: scale(1);
+      color: #000000;
+  }
 }
 
-.navbar {
-  background-color: #333;
-  color: rgb(255, 255, 255);
+
+.centered-td {
   text-align: center;
-  font-size: 20px;
+}
+
+
+
+
+/* Pequeño css para un botoncito, pero pequeñito */
+.cyber-button {
+  position: relative;
+  padding: 25px 50px;
+  background: #000;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  font-family: "Arial", sans-serif;
+  font-size: 1.5rem;
   font-weight: bold;
-  border: 5px solid rgb(0, 0, 0);
-  font-family: cursive;
-}
-
-h1, h2 {
-  margin: 0;
-  padding: 0;
-  font-family: cursive;
-  margin-left: 200px;
-}
-
-.img {
-  float:inline-end;
-  width: 41px;  
-  height: auto;
-  vertical-align: middle;  
-  padding-left: 50px;
-}
-
-.logo {
-  float:inline-end;
-  width: 29px;  
-  height: auto;
-  vertical-align: middle;  
-  padding-left: 50px;
-  margin-right: 9px;
-  padding: 0;
-
-}
-
-
-.table{
-    background-color: antiquewhite; 
-    border: 2px; 
-    border-color: black;
-    border: 2px solid black;
-}
-
-.columns{
-  border-color: rgb(15, 11, 233);
-  border: 2px solid  rgb(15, 11, 233);
-  font-family: cursive;
-}
-.columnsbajo
-{
-  border-color: black;
-
-  border: 2px solid black;
-}
-
-.histogram {
-    display: flex;
-    align-items: flex-end;
-    gap: 10px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    width: 80%;
-    margin: auto;
-}
-.bar {
-  text-align: center;
-  color: black;
-  background-color: rgb(0,140,255);
-  font-size: 14px;
-}
-
-
-.shadow__btn {
-  padding: 10px 20px;
-  border: 2px solid  rgb(0, 0, 0);
-  font-size: 10px;
-  color: #fff;
-  border-radius: 8px;
-  letter-spacing: 1px;
-  font-weight: 700;
+  letter-spacing: 4px;
+  color: #0ff;
   text-transform: uppercase;
+  box-shadow:
+    0 0 15px #0ff,
+    inset 0 0 15px #0ff;
+  text-shadow: 0 0 5px #0ff;
+  transition: all 0.3s;
+}
+
+.cyber-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(0, 255, 255, 0.4),
+    transparent
+  );
   transition: 0.5s;
-  transition-property: box-shadow;
-  font-family: cursive;
-  margin-bottom: 2px;
 }
 
-.shadow__btn {
-  background: rgb(0, 84, 153);
-  box-shadow: 0 0 10px rgb(0, 84, 153);
+.cyber-button:hover::before {
+  left: 100%;
 }
 
-.shadow__btn:hover {
-  font-size: 11px;
-  box-shadow: 0 0 5px rgb(0,140,255),
-              0 0 10px rgb(0,140,255),
-              0 0 20px rgb(0,140,255),
-              0 0 30px rgb(0,140,255);
+.glitch {
+  position: relative;
 }
-#fileInput{
-  margin-left: 720px;
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
 }
-.aaaa{
-  vertical-align: top; 
-}*/
+
+.glitch::before {
+  animation: glitch-effect 3s infinite;
+  color: #ff00ff;
+  left: 2px;
+}
+
+.glitch::after {
+  animation: glitch-effect 2s infinite;
+  color: #00ffff;
+  left: -2px;
+}
+
+@keyframes glitch-effect {
+  0% {
+    transform: none;
+    opacity: 0.8;
+  }
+  7% {
+    transform: translate(-2px, -3px);
+    opacity: 0.6;
+  }
+  10% {
+    transform: translate(2px, 3px);
+    opacity: 0.8;
+  }
+  20% {
+    transform: none;
+    opacity: 0.8;
+  }
+  27% {
+    transform: translate(2px, 3px);
+    opacity: 0.6;
+  }
+  30% {
+    transform: translate(-2px, -3px);
+    opacity: 0.8;
+  }
+  35% {
+    transform: none;
+    opacity: 0.8;
+  }
+  100% {
+    transform: none;
+    opacity: 0.8;
+  }
+}
+
+.cyberpunk-border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 2px solid #0ff;
+  clip-path: polygon(0 0, 100% 0, 100% 70%, 85% 100%, 0 100%);
+}
+
+.gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(0, 255, 255, 0.1) 10px,
+    rgba(0, 255, 255, 0.1) 20px
+  );
+}
+
+.scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(0, 255, 255, 0.2) 50%
+  );
+  background-size: 100% 4px;
+  animation: scan 0.5s linear infinite;
+}
+
+@keyframes scan {
+  0% {
+    background-position: 0 -1000px;
+  }
+  100% {
+    background-position: 0 1000px;
+  }
+}
+
+.cyber-button:hover {
+  transform: scale(1.05);
+  box-shadow:
+    0 0 25px #0ff,
+    inset 0 0 25px #0ff;
+}
+
+.cyber-button:active {
+  transform: scale(0.95);
+}
+
+
+
+
+
+
+/* Estilo de AMI */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #000; /* Fondo negro */
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Contenedor principal */
+.container {
+  width: 90%;
+  margin: auto;
+}
+
+/* Entrada de texto y botones */
+input, button {
+  margin: 10px;
+  padding: 10px;
+  font-size: 16px;
+}
+#bitInput {
+  width: 60%;
+}
+
+/* Contenedor para la barra de desplazamiento */
+.scroll-container {
+  width: 90%;
+  overflow-x: auto;
+  border: 1px solid #ccc;
+  margin-top: 20px;
+  background-color: #fff;
+}
+
+/* Estilo del canvas (gráfica) */
+grafica {
+  background-color: #fff; /* Fondo blanco para la gráfica */
+  border: 1px solid #ccc;
+}
+/* Termina estilo de AMI */
