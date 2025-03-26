@@ -7,7 +7,7 @@
   <link href="style.css" rel="stylesheet">
   <link rel="icon" type="image/png" href="img/itcolima.svg">
 </head>
-<body id="body">
+<body id="bodyAMI">
   <div id="textoInicial">
     <div>
       <img src="img/tecnm.png" alt="Imagen" class="logomexico">
@@ -25,11 +25,11 @@
   <div class="container">
 
     <!-- Entrada de bits -->
-    <input type="text" id="inputBit" placeholder="Ingresa una cadena de bits" maxlength="64">
+    <input type="text" id="inputBit" placeholder="Ingresa una cadena de bits">
     <p id="mensajeError" style="color: red;"></p>
     <button onclick="IngresarBits('ami')">Generar Grafica</button>
     <button onclick="generarRandom('ami')">Generar Grafica Aleatoria</button>
-
+    <input type="checkbox" id="banCuadros"> 
     <!-- Contenedor para desplazamiento -->
     <div class="scroll-container">
       <canvas id="grafica"></canvas>

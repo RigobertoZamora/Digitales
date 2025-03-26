@@ -25,8 +25,17 @@
       <div class="container">
         <input type="text" id="inputBit" placeholder="Ingresa una cadena de bits" maxlength="64">
         <p id="mensajeError" style="color: red;"></p>
-        <button onclick="IngresarBits('manDif')">Generar Grafica</button>
-        <button onclick="generarRandom('manDif')">Generar Grafica Aleatoria</button>
+          <button class="cyber-buttoncito" onclick="IngresarBits('manDif')">
+              <span data-text="AMI" class="glitch">Generar Grafica</span>
+              <span class="cyberpunk-border"></span>
+              <span class="scanline"></span>
+          </button>
+          <button class="cyber-buttoncito" onclick="generarRandom('manDif')">
+            <span data-text="AMI" class="glitch">Generar Grafica Aleatoria</span>
+            <span class="cyberpunk-border"></span>
+            <span class="scanline"></span>
+        </button>
+        <input type="checkbox" id="banCuadros"> 
         <div class="scroll-container">
           <canvas id="grafica"></canvas>
         </div>
