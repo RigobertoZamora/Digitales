@@ -2,15 +2,23 @@
 const originalWidth = 50; // Ancho original de cada bit
 const maxBitsToFit = 20; // Máximo de bits antes de reducir tamaño
 const canvasHeight = 400; // Altura fija
-const bitHeight = 100; // Altura de la onda
+const bitHeight = 100; // Altura del bit
 const topMargin = 50; // Espacio superior para etiquetas
 
+//VARIABLES PARA CONTROLAR EL CANVAS DE LA GRAFICA, LA CUADRICULA Y EL CONTEXTO 2D
 const canvas = document.getElementById("grafica");
 canvas.height = canvasHeight;
 const ctx = canvas.getContext("2d");
 
+//VARIABLES PARA CONTROLAR INPUTS Y TEXTOS
 const input = document.getElementById('inputBit');
+const combobox = document.getElementById('banCuadros');
 const mensajeError = document.getElementById('mensajeError');
+
+//VARIABLES PARA CONTROLAR LA CUADRICULA
+var UltimoTamaño = 0;
+var UltimoBitWidth = originalWidth;
+var Tipo="";
 
 input.addEventListener('input', function() {
   const valor = input.value;
@@ -24,6 +32,14 @@ input.addEventListener('input', function() {
   }
 });
 
+combobox.addEventListener('input', function() {
+  if (combobox.checked) {
+    drawGrid(UltimoTamaño, UltimoBitWidth);
+  } else {
+    borrarGrid(UltimoTamaño, UltimoBitWidth);
+  }
+});
+
 function IngresarBits(tipo) {
   let bits = document.getElementById("inputBit").value;
   console.log("Valor del input:", bits); // Añadido para depurar
@@ -33,21 +49,23 @@ function IngresarBits(tipo) {
     alert("El campo no puede estar vacío. Ingrese una secuencia de bits (0 y 1).");
     return;
   }
-  escala(bits, tipo);
+  Tipo = tipo;
+  escala(bits);
 }
 
 // Función para generar datos aleatorios
 function generarRandom(tipo) {
-  const length = Math.floor(Math.random() * 32) + 8; // Longitud aleatoria entre 8 y 32
+  const length = Math.floor(Math.random() * 64) + 8; // Longitud aleatoria entre 8 y 32
   let randomBits = "";
   for (let i = 0; i < length; i++) {
     randomBits += Math.random() > 0.5 ? "1" : "0";
   }
   document.getElementById("inputBit").value = randomBits;
-  escala(randomBits, tipo);
+  Tipo = tipo;
+  escala(randomBits);
 }
 
-function escala(bits, tipo)
+function escala(bits)
 {
   const tamaño = bits.length;
   let bitWidth = originalWidth;
@@ -59,48 +77,70 @@ function escala(bits, tipo)
     bitWidth *= scale;
   }
   const canvasWidth = tamaño * bitWidth + 100;
-  if(tipo == "man")
+  UltimoTamaño = tamaño;
+  UltimoBitWidth = bitWidth;
+  if(Tipo == "man")
   {
     //generarMan(bits, tamaño, bitWidth, canvasWidth);
   }
-  if(tipo == "manDif")
+  if(Tipo == "manDif")
   {
     generarManDif(bits, tamaño, bitWidth, canvasWidth);
   }
-  if(tipo == "ami")
+  if(Tipo == "ami")
   {
     generarAMI(bits, tamaño, bitWidth, canvasWidth);
   }
 }
 
-function generarManDif(bits) {
+function generarManDif(bits, tamaño, bitWidth, canvasWidth) {
   canvas.width = canvasWidth > 800 ? canvasWidth : 800;
-  // Limpiamos la gráfica
-  ctx.clearRect(0, 0, canvas.width, canvas.height); 
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawAxis(canvasWidth);
+  //grid = cuadricula
+  if(combobox.checked)
+  {
+    drawGrid(tamaño, bitWidth);
+  }
+  //inicializamos los valores de la grafica
+  let currentX = 50;
+  //configurar si inicia como caida o como subida en ambas variables, 1 caida
+  let lastPolarity = 1;
+  let currentY = (canvas.height / 2) + (bitHeight * lastPolarity);
 
   ctx.beginPath();
-  ctx.moveTo(x, y_actual); // Inicia la gráfica en el primer punto
-
-  for (let i = 0; i < bits.length; i++) {
-      let bit = bits[i];
-
-      // Transición Manchester Diferencial
-      let nuevo_y = (bit === 1) ? y_baja : y_alta; // Invertir en cada transición
-
-      // Dibuja la línea vertical para indicar el cambio de nivel
-      ctx.lineTo(x, nuevo_y);
-      
-      // Dibuja la línea horizontal que representa el bit
-      x += ancho;
-      ctx.lineTo(x, nuevo_y);
-
-      // Guarda el nivel actual para la siguiente iteración
-      y_actual = nuevo_y;
+  ctx.moveTo(currentX, currentY);
+  
+  for(let i=0;i<bits.length;i++)
+  {
+    const bit = bits[i];
+    // Mostrar etiqueta de bit en la parte superior
+    drawBitLabel(currentX, bit, bitWidth);
+    if (bit === "1") {
+      lastPolarity *= -1; // Invertir polaridad solo al inicio del bit
+    }else{
+      //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA FUNCIONO
+      currentY = (canvas.height / 2) - (bitHeight * lastPolarity);
+      ctx.lineTo(currentX, currentY);
+    }
+    ;
+     // Primera mitad del bit (mantiene o cambia según el bit)
+     currentX += bitWidth / 2;
+     ctx.lineTo(currentX, currentY);
+ 
+     // Transición a la segunda mitad del bit
+     currentY = (canvas.height / 2) + (bitHeight * lastPolarity);
+     ctx.lineTo(currentX, currentY);
+ 
+     // Segunda mitad del bit (se mantiene)
+     currentX += bitWidth / 2;
+     ctx.lineTo(currentX, currentY);
   }
-
-  ctx.strokeStyle = "cyan";
-  ctx.lineWidth = 2;
-  ctx.stroke();
+    // Dibujar línea final
+    ctx.strokeStyle = "#007bff";
+    ctx.lineWidth = 2;
+    ctx.stroke();
 }
 /* Todo de aquí en adelante hasta que se indique de que termino el scrip, pertenece al html AMI */
 
@@ -109,10 +149,13 @@ function generarAMI(bits, tamaño, bitWidth, canvasWidth) {
   canvas.width = canvasWidth > 800 ? canvasWidth : 800;
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  drawGrid(tamaño, bitWidth);
   drawAxis(canvasWidth);
-
+  //grid = cuadricula
+  if(combobox.checked)
+  {
+    drawGrid(tamaño, bitWidth);
+  }
+  //inicializamos los valores de la grafica
   let currentX = 50;
   let currentY = canvas.height / 2;
   let lastPolarity = 1;
@@ -147,7 +190,7 @@ function generarAMI(bits, tamaño, bitWidth, canvasWidth) {
   ctx.stroke();
 }
 
-// Dibujar etiquetas de bits
+// Pone los numeros de los bits
 function drawBitLabel(x, bit, bitWidth) {
   ctx.font = "14px Arial";
   ctx.fillStyle = "#333";
@@ -155,7 +198,7 @@ function drawBitLabel(x, bit, bitWidth) {
   ctx.fillText(bit, x + bitWidth / 2, topMargin - 10);
 }
 
-// Dibujar cuadrícula para la gráfica
+// Dibuja cuadrículas para la gráfica
 function drawGrid(bitCount, bitWidth) {
   ctx.strokeStyle = "#ddd";
   ctx.lineWidth = 1;
@@ -168,7 +211,20 @@ function drawGrid(bitCount, bitWidth) {
   }
 }
 
-// Dibujar eje horizontal
+// Borrar solo la cuadrícula
+function borrarGrid(bitCount, bitWidth) {
+  ctx.clearRect(0, topMargin, canvas.width, canvas.height - topMargin - 50);
+  if(Tipo=="ami")
+  {
+    generarAMI(input.value, UltimoTamaño, UltimoBitWidth, canvas.width);
+  }
+  if(Tipo=="manDif")
+  {
+    generarManDif(input.value, UltimoTamaño, UltimoBitWidth, canvas.width);
+  }
+}
+
+// Dibuja el eje horizontal
 function drawAxis(canvasWidth) {
   ctx.beginPath();
   ctx.moveTo(50, canvas.height / 2);

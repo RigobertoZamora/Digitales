@@ -1,6 +1,9 @@
 #body
 {
  background-color: rgb(0, 0, 0);
+ /*align-items: center;
+ display: flex;
+ justify-content: space-between;*/
 }
 #textoInicial
 {
@@ -52,7 +55,7 @@
     
   }
   .navbar {
-    background-color: #2735ff;
+    background-color: #000000;
     color: rgb(255, 255, 255);
     text-align: center;
     font-size: 24px;
@@ -148,6 +151,25 @@ h1{
   text-shadow: 0 0 5px #0ff;
   transition: all 0.3s;
 }
+.cyber-buttoncito {
+  position: relative;
+  padding: 15px 30px;
+  background: #000;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  font-family: "Arial", sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 4px;
+  color: #0ff;
+  text-transform: uppercase;
+  box-shadow:
+    0 0 15px #0ff,
+    inset 0 0 15px #0ff;
+  text-shadow: 0 0 5px #0ff;
+  transition: all 0.3s;
+}
 
 .cyber-button::before {
   content: "";
@@ -156,6 +178,7 @@ h1{
   left: -100%;
   width: 100%;
   height: 100%;
+
   background: linear-gradient(
     120deg,
     transparent,
@@ -169,66 +192,25 @@ h1{
   left: 100%;
 }
 
-.glitch {
-  position: relative;
-}
-
-.glitch::before,
-.glitch::after {
-  content: attr(data-text);
+.cyber-buttoncito::before {
+  content: "";
   position: absolute;
   top: 0;
-  left: 0;
+  left: -100%;
   width: 100%;
   height: 100%;
-  opacity: 0.8;
+
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(0, 255, 255, 0.4),
+    transparent
+  );
+  transition: 0.5s;
 }
 
-.glitch::before {
-  animation: glitch-effect 3s infinite;
-  color: #ff00ff;
-  left: 2px;
-}
-
-.glitch::after {
-  animation: glitch-effect 2s infinite;
-  color: #00ffff;
-  left: -2px;
-}
-
-@keyframes glitch-effect {
-  0% {
-    transform: none;
-    opacity: 0.8;
-  }
-  7% {
-    transform: translate(-2px, -3px);
-    opacity: 0.6;
-  }
-  10% {
-    transform: translate(2px, 3px);
-    opacity: 0.8;
-  }
-  20% {
-    transform: none;
-    opacity: 0.8;
-  }
-  27% {
-    transform: translate(2px, 3px);
-    opacity: 0.6;
-  }
-  30% {
-    transform: translate(-2px, -3px);
-    opacity: 0.8;
-  }
-  35% {
-    transform: none;
-    opacity: 0.8;
-  }
-  100% {
-    transform: none;
-    opacity: 0.8;
-  }
+.cyber-buttoncito:hover::before {
+  left: 100%;
 }
 
 .cyberpunk-border {
@@ -283,7 +265,7 @@ h1{
 .cyber-button:hover {
   transform: scale(1.05);
   box-shadow:
-    0 0 25px #0ff,
+    0 0 150px #0ff,
     inset 0 0 25px #0ff;
 }
 
@@ -291,15 +273,24 @@ h1{
   transform: scale(0.95);
 }
 
+.cyber-buttoncito:hover {
+  transform: scale(1.05);
+  box-shadow:
+    0 0 25px #0ff,
+    inset 0 0 25px #0ff;
+}
 
+.cyber-buttoncito:active {
+  transform: scale(0.95);
+}
 
 
 
 
 /* Estilo de AMI */
-body {
+#bodyAMI {
   font-family: Arial, sans-serif;
-  background-color: #000; /* Fondo negro */
+  background-color: rgb(123, 154, 154); /* Fondo negro */
   text-align: center;
   margin-top: 20px;
 }
