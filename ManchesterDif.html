@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CODIFICACIONES</title>
-    <link href="style.css" rel="stylesheet">
+    <link href="styleMD.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="img/itcolima.svg">
 </head>
 <body id="body">
@@ -22,24 +22,35 @@
       <div id="titulo">
         <h2>CODIFICACIÓN MANCHESTER DIFERENCIAL</h2> 
       </div>
-      <div class="container">
-        <input type="text" id="inputBit" placeholder="Ingresa una cadena de bits" maxlength="64">
-        <p id="mensajeError" style="color: red;"></p>
+      <div class="container">    
+<div id="lineainbt">
+        <div class="container2">
+          <input class="input" name="text" type="text" required="" id="inputBit"maxlength="64"/>
+          <label class="label">Ingresa una cadena de bits:</label>
+        </div>
+        <p id="mensajeError" style="color: rgb(209, 91, 91); position: fixed; transform: translate(10px, 60px);"></p>
           <button class="cyber-buttoncito" onclick="IngresarBits('manDif')">
               <span data-text="AMI" class="glitch">Generar Grafica</span>
-              <span class="cyberpunk-border"></span>
-              <span class="scanline"></span>
+              <span class="cyberpunk-border"></span>  
           </button>
           <button class="cyber-buttoncito" onclick="generarRandom('manDif')">
             <span data-text="AMI" class="glitch">Generar Grafica Aleatoria</span>
             <span class="cyberpunk-border"></span>
-            <span class="scanline"></span>
         </button>
-        <input type="checkbox" id="banCuadros"> 
+        <h2 id="textcuadri">Activar cuadrícula:</h2>
+        <label class="checkbox-wrapper">
+          <input checked="" type="checkbox" id="banCuadros"/>
+          <div class="checkbox"></div>
+        </label>
+</div>
         <div class="scroll-container">
           <canvas id="grafica"></canvas>
         </div>
       </div>
+      <button onclick="location.href='index.html'"class="button">🏠 Regresar</button>
+<nav class="navbar">
+  <h1 id="textonav">Desarrolladores: Rodolfo Vega, Rigoberto Zamora, Moisés Urbina, Elias Melendez</h1>
+</nav> 
       <script src="function.js"></script>
 </body>
 </html>
