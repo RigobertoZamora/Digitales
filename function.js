@@ -91,8 +91,215 @@ function escala(bits)
   {
     generarAMI(bits, tamaño, bitWidth, canvasWidth);
   }
+  if(Tipo=="uni")
+  {
+    generarUnipolar(bits, tamaño, bitWidth, canvasWidth)
+  }
+  if(Tipo=="rz")
+  {
+    generarRZ(bits, tamaño, bitWidth, canvasWidth)
+  }
+  if(Tipo=="nrz-l")
+  {
+    generarNRZl(bits, tamaño, bitWidth, canvasWidth)
+  }
+  if(Tipo=="nrz-i")
+  {
+    generarNRZi(bits, tamaño, bitWidth, canvasWidth)
+  }
+  if(Tipo=="b8zs")
+  {
+    generarB8ZS(bits, tamaño, bitWidth, canvasWidth)
+  }
+    
 }
 
+// Dibujar gráfica B8ZS
+function generarB8ZS(bits, tamaño, bitWidth, canvasWidth) {
+  canvas.width = canvasWidth > 800 ? canvasWidth : 800;
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawAxis(canvasWidth);
+  //grid = cuadricula
+  if(combobox.checked)
+  {
+    drawGrid(tamaño, bitWidth);
+  }
+  //inicializamos los valores de la grafica
+  let currentX = 50;
+  let currentY = canvas.height / 2;
+  let lastPolarity = 1;
+
+  ctx.beginPath();
+  ctx.moveTo(currentX, currentY);
+  let contaCeros = 0;
+  for (let i = 0; i < bits.length; i++) {
+    const bit = bits[i];
+
+    // Mostrar etiqueta de bit en la parte superior
+    drawBitLabel(currentX, bit, bitWidth);
+
+    if (bit === "1") {
+      currentY = canvas.height / 2 - (bitHeight * lastPolarity);
+      lastPolarity *= -1;
+    } else {
+      currentY = canvas.height / 2;
+      contaCeros += 1;
+      for(let j=0; j<=8; j++)
+      {
+        if(bits[i])
+        if(contaCeros==8)
+        {
+          contaCeros=0; 
+          if(lastPolarity == 1)
+          {
+
+          }else{
+
+          }
+        }
+        contaCeros += 1;
+      }
+      
+    }
+
+    // Línea vertical
+    ctx.lineTo(currentX, currentY);
+    currentX += bitWidth;
+
+    // Línea horizontal
+    ctx.lineTo(currentX, currentY);
+  }
+
+  // Dibujar línea final
+  ctx.strokeStyle = "#007bff";
+  ctx.lineWidth = 2;
+  ctx.stroke();
+}
+
+
+//Generar gráfica NRZ-L
+function generarNRZl(bits, tamaño, bitWidth, canvasWidth) {
+  canvas.width = canvasWidth > 800 ? canvasWidth : 800;
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawAxis(canvasWidth);
+  //grid = cuadricula
+  if(combobox.checked)
+  {
+    drawGrid(tamaño, bitWidth);
+  }
+  //inicializamos los valores de la grafica
+  let currentX = 50;
+  let currentY = (canvas.height / 2);
+  ctx.beginPath();
+  ctx.moveTo(currentX, currentY);
+  
+  for(let i=0;i<bits.length;i++)
+  {
+    const bit = bits[i];
+    // Mostrar etiqueta de bit en la parte superior
+    drawBitLabel(currentX, bit, bitWidth);
+    if (bit === "0") {
+      currentY = canvas.height/2 - bitHeight;
+      ctx.lineTo(currentX, currentY);
+    }else{
+      currentY = canvas.height/2 + bitHeight;
+      ctx.lineTo(currentX, currentY);
+    }
+    currentX += bitWidth;
+    ctx.lineTo(currentX, currentY);
+  }
+    // Dibujar línea final
+    ctx.strokeStyle = "#007bff";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+}
+
+//Generar gráfica NRZ-I
+function generarNRZi(bits, tamaño, bitWidth, canvasWidth) {
+  canvas.width = canvasWidth > 800 ? canvasWidth : 800;
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawAxis(canvasWidth);
+  //grid = cuadricula
+  if(combobox.checked)
+  {
+    drawGrid(tamaño, bitWidth);
+  }
+  //inicializamos los valores de la grafica
+  let currentX = 50;
+  let currentY = (canvas.height / 2);
+  ctx.beginPath();
+  ctx.moveTo(currentX, currentY);
+  let lastPolarity = 1;
+  
+  for(let i=0;i<bits.length;i++)
+  {
+    const bit = bits[i];
+    // Mostrar etiqueta de bit en la parte superior
+    drawBitLabel(currentX, bit, bitWidth);
+    if (bit === "1") {
+      lastPolarity *= -1;
+    }
+    currentY = canvas.height/2 - (bitHeight*lastPolarity);
+    ctx.lineTo(currentX, currentY);
+    currentX += bitWidth;
+    ctx.lineTo(currentX, currentY);
+  }
+    // Dibujar línea final
+    ctx.strokeStyle = "#007bff";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+}
+
+//Dibuja la gráfica RZ
+function generarRZ(bits, tamaño, bitWidth, canvasWidth) {
+  canvas.width = canvasWidth > 800 ? canvasWidth : 800;
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawAxis(canvasWidth);
+  //grid = cuadricula
+  if(combobox.checked)
+  {
+    drawGrid(tamaño, bitWidth);
+  }
+  //inicializamos los valores de la grafica
+  let currentX = 50;
+  let currentY = (canvas.height / 2);
+  ctx.beginPath();
+  ctx.moveTo(currentX, currentY);
+  
+  for(let i=0;i<bits.length;i++)
+  {
+    const bit = bits[i];
+    // Mostrar etiqueta de bit en la parte superior
+    drawBitLabel(currentX, bit, bitWidth);
+    if (bit === "1") {
+      currentY = canvas.height/2 - bitHeight;
+      ctx.lineTo(currentX, currentY);
+      currentX += bitWidth/2;
+      ctx.lineTo(currentX, currentY);
+      currentY += bitHeight;
+      ctx.lineTo(currentX, currentY);
+    }else{
+      currentY = canvas.height/2 + bitHeight;
+      ctx.lineTo(currentX, currentY);
+      currentX += bitWidth/2;
+      ctx.lineTo(currentX, currentY);
+      currentY -= bitHeight;
+      ctx.lineTo(currentX, currentY);
+    }
+    currentX += bitWidth/2;
+    ctx.lineTo(currentX, currentY);
+  }
+    // Dibujar línea final
+    ctx.strokeStyle = "#007bff";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+}
+
+//Dibuja la gráfica Manchester Diferencial
 function generarManDif(bits, tamaño, bitWidth, canvasWidth) {
   canvas.width = canvasWidth > 800 ? canvasWidth : 800;
 
@@ -142,7 +349,44 @@ function generarManDif(bits, tamaño, bitWidth, canvasWidth) {
     ctx.lineWidth = 2;
     ctx.stroke();
 }
-/* Todo de aquí en adelante hasta que se indique de que termino el scrip, pertenece al html AMI */
+
+//Dibuja la gráfica Unipolar
+function generarUnipolar(bits, tamaño, bitWidth, canvasWidth) {
+  canvas.width = canvasWidth > 800 ? canvasWidth : 800;
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawAxis(canvasWidth);
+  //grid = cuadricula
+  if(combobox.checked)
+  {
+    drawGrid(tamaño, bitWidth);
+  }
+  //inicializamos los valores de la grafica
+  let currentX = 50;
+  let currentY = (canvas.height / 2);
+  ctx.beginPath();
+  ctx.moveTo(currentX, currentY);
+  
+  for(let i=0;i<bits.length;i++)
+  {
+    const bit = bits[i];
+    // Mostrar etiqueta de bit en la parte superior
+    drawBitLabel(currentX, bit, bitWidth);
+    if (bit === "1") {
+      currentY = canvas.height/2 - bitHeight;//???????????????? bueno, funciona
+      ctx.lineTo(currentX, currentY);
+    }else{
+      currentY = canvas.height / 2;
+      ctx.lineTo(currentX, currentY);
+    }
+    currentX += bitWidth;
+    ctx.lineTo(currentX, currentY);
+  }
+    // Dibujar línea final
+    ctx.strokeStyle = "#007bff";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+}
 
 // Dibujar gráfica AMI
 function generarAMI(bits, tamaño, bitWidth, canvasWidth) {
@@ -162,7 +406,7 @@ function generarAMI(bits, tamaño, bitWidth, canvasWidth) {
 
   ctx.beginPath();
   ctx.moveTo(currentX, currentY);
-
+  let ban = false;
   for (let i = 0; i < bits.length; i++) {
     const bit = bits[i];
 
@@ -172,16 +416,44 @@ function generarAMI(bits, tamaño, bitWidth, canvasWidth) {
     if (bit === "1") {
       currentY = canvas.height / 2 - (bitHeight * lastPolarity);
       lastPolarity *= -1;
+      // Línea vertical
+      ctx.lineTo(currentX, currentY);
+      currentX += bitWidth;
+      // Línea horizontal
+      ctx.lineTo(currentX, currentY);
+      contaCeros = 0;
     } else {
       currentY = canvas.height / 2;
+      ctx.lineTo(currentX, currentY);
+      contaCeros += 1;
+      for(let j=0; j<=8; j++)
+      {
+        if(bits[i+j]==1)
+        {
+          ban = true;
+        }
+      }
+      if(ban)
+      {
+        currentX += bitWidth;
+        ctx.lineTo(currentX, currentY);
+      }else{
+        //LAS SIGUIENTES 8 SON 0, DIBUJAR LAS VIOLACIONES DE ACUERDO A LA POLARIDAD
+        if(lastPolarity==1)
+        {
+
+        }else{
+          
+        }
+      }
+
+
+
+
+
     }
 
-    // Línea vertical
-    ctx.lineTo(currentX, currentY);
-    currentX += bitWidth;
-
-    // Línea horizontal
-    ctx.lineTo(currentX, currentY);
+    
   }
 
   // Dibujar línea final
@@ -222,6 +494,26 @@ function borrarGrid(bitCount, bitWidth) {
   {
     generarManDif(input.value, UltimoTamaño, UltimoBitWidth, canvas.width);
   }
+  if(Tipo=="uni")
+  {
+    generarUnipolar(input.value, UltimoTamaño, UltimoBitWidth, canvas.width);
+  }
+  if(Tipo=="rz")
+  {
+    generarRZ(input.value, UltimoTamaño, UltimoBitWidth, canvas.width);
+  }  
+  if(Tipo=="nrz-l")
+  {
+    generarNRZl(input.value, UltimoTamaño, UltimoBitWidth, canvas.width);
+  }  
+  if(Tipo=="nrz-i")
+  {
+    generarNRZi(input.value, UltimoTamaño, UltimoBitWidth, canvas.width);
+  }
+  if(Tipo=="b8zs")
+  {
+    generarB8ZS(input.value, UltimoTamaño, UltimoBitWidth, canvas.width);
+  }  
 }
 
 // Dibuja el eje horizontal
@@ -233,5 +525,3 @@ function drawAxis(canvasWidth) {
   ctx.lineWidth = 1.5;
   ctx.stroke();
 }
-
-/* Ya terminó las funciones de AMI */
