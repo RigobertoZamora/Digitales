@@ -24,7 +24,7 @@
 #titulo
 {
  
-  background: linear-gradient(to right, rgb(75, 1, 1), rgb(255, 0, 0), rgb(75, 1, 1));
+  background: linear-gradient(to right, rgb(147, 4, 4), rgb(75, 2, 2), rgb(147, 4, 4));
   text-align: center;
   height: 70px;
   margin-top: 15px;
@@ -32,6 +32,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  color: white;
+  box-shadow:
+  0 0 10px rgb(1, 142, 142),/*---------------------------------------------------------------------------------------------*/
+  inset 0 0 5px #0ff;
  }
 
 .logomexico {
@@ -45,13 +49,18 @@
     margin-right: 20px;
   }
   .tecno{
-    width: 503px;  
+    width: 470px;  
     opacity: 0.8;
-    animation: pulso 1s infinite alternate ease-in-out;
+    animation: pulso 1.5s infinite alternate ease-in-out;
   }
   .tdimg
   {
     width: 360px;  
+    
+  }
+  #tablita
+  {
+    width: 99.7%;  
     
   }
   .navbar {
@@ -64,7 +73,7 @@
     border-bottom: 7px solid rgb(2, 9, 89);
     clip-path: polygon(0% 0%, 100% 0%, 99% 50%, 100% 100%, 0% 100%, 1% 50%);
     position: fixed;
-    width: 99.4%;
+    width: 99%;
     bottom: 0px;
     height: 40px;
     display: flex;
@@ -95,14 +104,14 @@ h1{
 
  @keyframes pulso {
   0% {
-      filter:  brightness(.6);
+      filter:  brightness(.5);
      
   }
   50% {
-      filter: brightness(.9); /* Efecto azul */
+      filter: brightness(1.5); /* Efecto azul */
   }
   100% {
-      filter: brightness(.9);
+      filter: brightness(2);
   }
 }
 @keyframes pulso2 {
@@ -150,6 +159,7 @@ h1{
     inset 0 0 15px #0ff;
   text-shadow: 0 0 5px #0ff;
   transition: all 0.3s;
+  width: 360px;/*---------------------------------------------------------------------------------------------*/
 }
 .cyber-buttoncito {
   position: relative;
@@ -265,7 +275,7 @@ h1{
 .cyber-button:hover {
   transform: scale(1.05);
   box-shadow:
-    0 0 150px #0ff,
+    0 0 150px rgb(1, 142, 142),/*---------------------------------------------------------------------------------------------*/
     inset 0 0 25px #0ff;
 }
 
@@ -287,42 +297,11 @@ h1{
 
 
 
-/* Estilo de AMI */
-#bodyAMI {
-  font-family: Arial, sans-serif;
-  background-color: rgb(123, 154, 154); /* Fondo negro */
-  text-align: center;
-  margin-top: 20px;
-}
 
-/* Contenedor principal */
-.container {
-  width: 90%;
-  margin: auto;
-}
 
-/* Entrada de texto y botones */
-input, button {
-  margin: 10px;
-  padding: 10px;
-  font-size: 16px;
-}
-#bitInput {
-  width: 60%;
-}
 
-/* Contenedor para la barra de desplazamiento */
-.scroll-container {
-  width: 90%;
-  overflow-x: auto;
-  border: 1px solid #ccc;
-  margin-top: 20px;
-  background-color: #fff;
-}
 
-/* Estilo del canvas (gráfica) */
-grafica {
-  background-color: #fff; /* Fondo blanco para la gráfica */
-  border: 1px solid #ccc;
-}
-/* Termina estilo de AMI */
+
+
+
+
