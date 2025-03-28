@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Codificación Manchester Animada</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 25px;
+            background: #f0f0f0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .controls {
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        input[type="text"] {
+            width: 400px;
+            padding: 15px;
+            font-size: 20px;
+            border: 3px solid #4c63af;
+            border-radius: 8px;
+        }
+
+        button {
+            padding: 15px 35px;
+            background: #4c7aaf;
+            color: rgb(255, 255, 255);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 20px;
+            margin-left: 20px;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #4562a0;
+        }
+        
+        #error {
+            color: red;
+            margin-top: 20px;
+            height: 30px;
+            font-size: 18px;
+        }
+
+        .canvas-container {
+            width: 100%;
+            overflow-x: auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            padding: 30px;
+            position: relative;
+            margin-top: 25px;
+        }
+
+        #waveformCanvas {
+            border: 3px solid #ddd;
+            border-radius: 10px;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #ddd;
+            margin-top: 20px;
+            display: none;
+            border-radius: 4px;
+        }
+
+        .progress {
+            height: 100%;
+            background: #4CAF50;
+            width: 0;
+            transition: width 0.3s;
+            border-radius: 4px;
+        }
+
+        .bit-labels {
+            position: absolute;
+            bottom: 15px;
+            left: 0;
+            right: 0;
+            height: 30px;
+            pointer-events: none;
+        }
+
+        .bit-label {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            opacity: 0;
+            transition: opacity 0.3s;
+            position: absolute;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="controls">
+            <input type="text" id="binaryInput" placeholder="Ingresa bits (ej: 10110011)">
+            <button onclick="toggleAnimation()">Iniciar</button>
+            <div id="error"></div>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+        </div>
+        <div class="canvas-container">
+            <canvas id="waveformCanvas"></canvas>
+            <div id="bitLabels" class="bit-labels"></div>
+        </div>
+    </div>
+
+    <script>
+        let animationInterval;
+        let isAnimating = false;
+        let currentStep = 0;
+        let binaryString = '';
+        const stepDuration = 100;
+        const bitWidth = 100;
+
+        function toggleAnimation() {
+            const input = document.getElementById('binaryInput').value;
+            const errorDiv = document.getElementById('error');
+            
+            if (!/^[01]+$/.test(input)) {
+                errorDiv.textContent = 'Error: Solo se permiten 0s y 1s';
+                return;
+            }
+            
+            if (isAnimating) {
+                stopAnimation();
+            } else {
+                startAnimation(input);
+            }
+        }
+
+        function startAnimation(input) {
+            stopAnimation();
+            binaryString = input;
+            currentStep = 0;
+            isAnimating = true;
+            
+            const canvas = document.getElementById('waveformCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = binaryString.length * bitWidth;
+            canvas.height = 345;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            const bitLabels = document.getElementById('bitLabels');
+            bitLabels.innerHTML = binaryString.split('').map((bit, index) => {
+                const position = (index * bitWidth) + (bitWidth / 2);
+                return `<div class="bit-label" style="left: ${position}px">${bit}</div>`;
+            }).join('');
+            
+            document.querySelector('.progress-bar').style.display = 'block';
+            updateProgress(0);
+            animateStep(ctx);
+        }
+
+        function stopAnimation() {
+            isAnimating = false;
+            clearTimeout(animationInterval);
+            document.querySelector('button').textContent = 'Iniciar';
+            document.querySelector('.progress-bar').style.display = 'none';
+        }
+
+        function animateStep(ctx) {
+            if (!isAnimating || currentStep >= binaryString.length * 2) {
+                stopAnimation();
+                return;
+            }
+
+            const bitIndex = Math.floor(currentStep / 2);
+            const isFirstHalf = currentStep % 2 === 0;
+            const bit = binaryString[bitIndex];
+            
+            drawStep(ctx, bitIndex, bit, isFirstHalf);
+            
+            if (!isFirstHalf) {
+                const labels = document.getElementsByClassName('bit-label');
+                labels[bitIndex].style.opacity = '1';
+            }
+            
+            updateProgress((currentStep + 1) / (binaryString.length * 2) * 100);
+            currentStep++;
+            
+            document.querySelector('button').textContent = 'Detener';
+            
+            animationInterval = setTimeout(() => {
+                animateStep(ctx);
+            }, stepDuration);
+        }
+
+        function drawStep(ctx, bitIndex, bit, isFirstHalf) {
+            const levels = { high: 80, low: 220 };
+            const xStart = bitIndex * bitWidth;
+            const xMid = xStart + (bitWidth / 2);
+            
+            ctx.strokeStyle = '#2196F3';
+            ctx.lineWidth = 5;
+            
+            if (currentStep === 0) {
+                ctx.strokeStyle = '#e0e0e0';
+                ctx.lineWidth = 1.5;
+                for (let x = 0; x <= ctx.canvas.width; x += 50) {
+                    ctx.beginPath();
+                    ctx.moveTo(x, 0);
+                    ctx.lineTo(x, ctx.canvas.height);
+                    ctx.stroke();
+                }
+                ctx.fillStyle = '#333';
+                ctx.font = 'bold 22px Arial';
+                ctx.fillText('Codificación Manchester', 25, 40);
+            }
+            
+            ctx.strokeStyle = '#2196F3';
+            ctx.lineWidth = 5;
+            
+            if (isFirstHalf) {
+                const targetY = bit === '0' ? levels.low : levels.high;
+                
+                if (bitIndex === 0) {
+                    ctx.beginPath();
+                    ctx.moveTo(xStart, targetY);
+                } else {
+                    const prevBit = binaryString[bitIndex - 1];
+                    const prevY = prevBit === '0' ? levels.high : levels.low;
+                    ctx.beginPath();
+                    ctx.moveTo(xStart, prevY);
+                    ctx.lineTo(xStart, targetY);
+                }
+                
+                ctx.lineTo(xMid, targetY);
+                ctx.stroke();
+            } else {
+                const startY = bit === '0' ? levels.low : levels.high;
+                const targetY = bit === '0' ? levels.high : levels.low;
+                
+                ctx.beginPath();
+                ctx.moveTo(xMid, startY);
+                ctx.lineTo(xMid, targetY);
+                ctx.lineTo(xMid + (bitWidth / 2), targetY);
+                ctx.stroke();
+            }
+        }
+        function updateProgress(percentage) {
+            document.querySelector('.progress').style.width = percentage + '%';
+        }
+    </script>
+</body>
+</html>
