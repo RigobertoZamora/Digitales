@@ -111,11 +111,14 @@ function escala(bits)
   {
     generarB8ZS(bits, tamaño, bitWidth, canvasWidth)
   }
-    
+  if(Tipo=="man")
+  {
+    generarMan(bits, tamaño, bitWidth, canvasWidth)
+  }  
 }
 
-// Dibujar gráfica B8ZS
-function generarB8ZS(bits, tamaño, bitWidth, canvasWidth) {
+// Dibujar gráfica AMI
+function generarAMI(bits, tamaño, bitWidth, canvasWidth) {
   canvas.width = canvasWidth > 800 ? canvasWidth : 800;
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -132,7 +135,7 @@ function generarB8ZS(bits, tamaño, bitWidth, canvasWidth) {
 
   ctx.beginPath();
   ctx.moveTo(currentX, currentY);
-  let contaCeros = 0;
+
   for (let i = 0; i < bits.length; i++) {
     const bit = bits[i];
 
@@ -144,23 +147,6 @@ function generarB8ZS(bits, tamaño, bitWidth, canvasWidth) {
       lastPolarity *= -1;
     } else {
       currentY = canvas.height / 2;
-      contaCeros += 1;
-      for(let j=0; j<=8; j++)
-      {
-        if(bits[i])
-        if(contaCeros==8)
-        {
-          contaCeros=0; 
-          if(lastPolarity == 1)
-          {
-
-          }else{
-
-          }
-        }
-        contaCeros += 1;
-      }
-      
     }
 
     // Línea vertical
@@ -348,7 +334,150 @@ function generarManDif(bits, tamaño, bitWidth, canvasWidth) {
     ctx.strokeStyle = "#007bff";
     ctx.lineWidth = 2;
     ctx.stroke();
+}//Dibuja la gráfica Manchester
+function generarMan(bits, tamaño, bitWidth, canvasWidth) {
+  canvas.width = canvasWidth > 800 ? canvasWidth : 800;
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawAxis(canvasWidth);
+
+  if (combobox.checked) {
+    drawGrid(tamaño, bitWidth);
+  }
+
+  let currentX = 50;
+  let currentY = canvas.height / 2;
+  const progressBar = document.getElementById('progress');
+
+  ctx.beginPath();
+  ctx.moveTo(currentX, currentY);
+
+  animateManchester(bits, currentX, currentY, bitWidth, bitHeight, progressBar);
 }
+
+function animateManchester(bits, currentX, currentY, bitWidth, bitHeight, progressBar) {
+  let i = 0;
+
+  function step() {
+    if (i >= bits.length) {
+      return;
+    }
+
+    const bit = bits[i];
+    drawBitLabel(currentX, bit, bitWidth);
+
+    if (bit === "1") {
+      currentY = (canvas.height / 2) + bitHeight;
+      if (i === 0) {
+        ctx.moveTo(currentX, currentY);
+      }
+      ctx.lineTo(currentX, currentY);
+      currentX += bitWidth / 2;
+      ctx.lineTo(currentX, currentY);
+      currentY = (canvas.height / 2) - bitHeight;
+      ctx.lineTo(currentX, currentY);
+      currentX += bitWidth / 2;
+      ctx.lineTo(currentX, currentY);
+    } else {
+      currentY = (canvas.height / 2) - bitHeight;
+      if (i === 0) {
+        ctx.moveTo(currentX, currentY);
+      }
+      ctx.lineTo(currentX, currentY);
+      currentX += bitWidth / 2;
+      ctx.lineTo(currentX, currentY);
+      currentY = (canvas.height / 2) + bitHeight;
+      ctx.lineTo(currentX, currentY);
+      currentX += bitWidth / 2;
+      ctx.lineTo(currentX, currentY);
+    }
+
+    progressBar.style.width = ((i + 1) / bits.length) * 100 + '%';
+    ctx.strokeStyle = "#007bff";
+    ctx.lineWidth = 2;
+    ctx.stroke(); // Se pinta el segmento en cada paso
+
+    i++;
+    setTimeout(step, 300);
+  }
+
+  step();
+}
+
+/*
+//Dibuja la gráfica Manchester
+function generarManS(bits, tamaño, bitWidth, canvasWidth) {
+  canvas.width = canvasWidth > 800 ? canvasWidth : 800;
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawAxis(canvasWidth);
+  //grid = cuadricula
+  if(combobox.checked)
+  {
+    drawGrid(tamaño, bitWidth);
+  }
+  //inicializamos los valores de la grafica
+  let currentX = 50;
+  let currentY = canvas.height / 2;
+  const progressBar = document.getElementById('progress');
+
+  ctx.beginPath();
+  ctx.moveTo(currentX, currentY);
+  
+  for(let i=0;i<bits.length;i++)
+  {
+    const bit = bits[i];
+    // Mostrar etiqueta de bit en la parte superior
+    drawBitLabel(currentX, bit, bitWidth);
+    if (bit === "1") {
+      
+      // Transición a la segunda mitad del bit
+      currentY = (canvas.height / 2) + bitHeight;
+      if(i==0)
+      {
+        ctx.moveTo(currentX, currentY);
+      }
+      ctx.lineTo(currentX, currentY);
+      // Primera mitad del bit (mantiene o cambia según el bit)
+      currentX += bitWidth / 2;
+      ctx.lineTo(currentX, currentY);
+  
+      // Transición a la segunda mitad del bit
+      currentY = (canvas.height / 2) - bitHeight;
+      ctx.lineTo(currentX, currentY);
+  
+      // Segunda mitad del bit (se mantiene)
+      currentX += bitWidth / 2;
+      ctx.lineTo(currentX, currentY);
+    }else{
+      // Transición a la segunda mitad del bit
+      currentY = (canvas.height / 2) - bitHeight;
+      if(i==0)
+        {
+          ctx.moveTo(currentX, currentY);
+        }
+      ctx.lineTo(currentX, currentY);
+      
+      // Primera mitad del bit (mantiene o cambia según el bit)
+      currentX += bitWidth / 2;
+      ctx.lineTo(currentX, currentY);
+  
+      // Transición a la segunda mitad del bit
+      currentY = (canvas.height / 2) + bitHeight;
+      ctx.lineTo(currentX, currentY);
+  
+      // Segunda mitad del bit (se mantiene)
+      currentX += bitWidth / 2;
+      ctx.lineTo(currentX, currentY);
+    }
+    ;
+     
+  }
+    // Dibujar línea final
+    ctx.strokeStyle = "#007bff";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+}*/
 
 //Dibuja la gráfica Unipolar
 function generarUnipolar(bits, tamaño, bitWidth, canvasWidth) {
@@ -388,8 +517,8 @@ function generarUnipolar(bits, tamaño, bitWidth, canvasWidth) {
     ctx.stroke();
 }
 
-// Dibujar gráfica AMI
-function generarAMI(bits, tamaño, bitWidth, canvasWidth) {
+// Dibujar gráfica B8ZS
+function generarB8ZS(bits, tamaño, bitWidth, canvasWidth) {
   canvas.width = canvasWidth > 800 ? canvasWidth : 800;
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -407,7 +536,9 @@ function generarAMI(bits, tamaño, bitWidth, canvasWidth) {
   ctx.beginPath();
   ctx.moveTo(currentX, currentY);
   let ban = false;
-  for (let i = 0; i < bits.length; i++) {
+  let i = 0;
+  let canvasHeight = canvas.height;
+  while(i < bits.length) {
     const bit = bits[i];
 
     // Mostrar etiqueta de bit en la parte superior
@@ -419,19 +550,25 @@ function generarAMI(bits, tamaño, bitWidth, canvasWidth) {
       // Línea vertical
       ctx.lineTo(currentX, currentY);
       currentX += bitWidth;
+      
       // Línea horizontal
       ctx.lineTo(currentX, currentY);
-      contaCeros = 0;
     } else {
       currentY = canvas.height / 2;
       ctx.lineTo(currentX, currentY);
-      contaCeros += 1;
-      for(let j=0; j<=8; j++)
-      {
-        if(bits[i+j]==1)
+      // Verificar si hay exactamente ocho ceros consecutivos
+      if (i + 7 < bits.length) {
+        ban = false;
+        for(j=0;j<8;j++)
         {
-          ban = true;
+          if(bits[i+j]==1||bits[i+j]=="1")
+          {
+            ban = true;
+            break;
+          }
         }
+      } else {
+          ban = true; // Si no hay suficientes bits, no aplicar B8ZS
       }
       if(ban)
       {
@@ -439,21 +576,84 @@ function generarAMI(bits, tamaño, bitWidth, canvasWidth) {
         ctx.lineTo(currentX, currentY);
       }else{
         //LAS SIGUIENTES 8 SON 0, DIBUJAR LAS VIOLACIONES DE ACUERDO A LA POLARIDAD
+        currentX += bitWidth;
+        ctx.lineTo(currentX, currentY);
+        drawBitLabel(currentX, bits[i+1], bitWidth);
+        currentX += bitWidth;
+        ctx.lineTo(currentX, currentY);
+        drawBitLabel(currentX, bits[i+2], bitWidth);
+        currentX += bitWidth;
+        ctx.lineTo(currentX, currentY);
         if(lastPolarity==1)
-        {
-
+        {  
+          drawBitLabel(currentX, bits[i+3], bitWidth);//inicia violación
+          currentY = (canvasHeight/2)+bitHeight;
+          ctx.lineTo(currentX, currentY);
+          currentX += bitWidth;
+          ctx.lineTo(currentX, currentY);
+          currentY = canvasHeight/2;
+          ctx.lineTo(currentX, currentY);
+          drawBitLabel(currentX, bits[i+4], bitWidth);
+          currentY = (canvasHeight/2)-bitHeight;
+          ctx.lineTo(currentX, currentY);
+          currentX += bitWidth;
+          ctx.lineTo(currentX, currentY);
+          currentY = canvasHeight/2;
+          ctx.lineTo(currentX, currentY);
+          drawBitLabel(currentX, bits[i+5], bitWidth);
+          currentX += bitWidth;
+          ctx.lineTo(currentX, currentY);
+          drawBitLabel(currentX, bits[i+6], bitWidth);
+          currentY = (canvasHeight/2)-bitHeight;
+          ctx.lineTo(currentX, currentY);
+          currentX += bitWidth;
+          ctx.lineTo(currentX, currentY);
+          currentY = canvasHeight/2;
+          ctx.lineTo(currentX, currentY);
+          drawBitLabel(currentX, bits[i+7], bitWidth);
+          currentY = (canvasHeight/2)+bitHeight;
+          ctx.lineTo(currentX, currentY);
+          currentX += bitWidth;
+          ctx.lineTo(currentX, currentY);
+          currentY = canvasHeight/2;
+          ctx.lineTo(currentX, currentY);
         }else{
-          
+          drawBitLabel(currentX, bits[i+3], bitWidth);//inicia violación
+          currentY = (canvasHeight/2)-bitHeight;
+          ctx.lineTo(currentX, currentY);
+          currentX += bitWidth;
+          ctx.lineTo(currentX, currentY);
+          currentY = canvasHeight/2;
+          ctx.lineTo(currentX, currentY);
+          drawBitLabel(currentX, bits[i+4], bitWidth);
+          currentY = (canvasHeight/2)+bitHeight;
+          ctx.lineTo(currentX, currentY);
+          currentX += bitWidth;
+          ctx.lineTo(currentX, currentY);
+          currentY = canvasHeight/2;
+          ctx.lineTo(currentX, currentY);
+          drawBitLabel(currentX, bits[i+5], bitWidth);
+          currentX += bitWidth;
+          ctx.lineTo(currentX, currentY);
+          drawBitLabel(currentX, bits[i+6], bitWidth);
+          currentY = (canvasHeight/2)+bitHeight;
+          ctx.lineTo(currentX, currentY);
+          currentX += bitWidth;
+          ctx.lineTo(currentX, currentY);
+          currentY = canvasHeight/2;
+          ctx.lineTo(currentX, currentY);
+          drawBitLabel(currentX, bits[i+7], bitWidth);
+          currentY = (canvasHeight/2)-bitHeight;
+          ctx.lineTo(currentX, currentY);
+          currentX += bitWidth;
+          ctx.lineTo(currentX, currentY);
+          currentY = canvasHeight/2;
+          ctx.lineTo(currentX, currentY);
         }
+        i+=6;
       }
-
-
-
-
-
     }
-
-    
+    i+=1;
   }
 
   // Dibujar línea final
@@ -513,6 +713,10 @@ function borrarGrid(bitCount, bitWidth) {
   if(Tipo=="b8zs")
   {
     generarB8ZS(input.value, UltimoTamaño, UltimoBitWidth, canvas.width);
+  }  
+  if(Tipo=="b8zs")
+  {
+    generarMan(input.value, UltimoTamaño, UltimoBitWidth, canvas.width);
   }  
 }
 
