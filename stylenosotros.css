@@ -1,0 +1,173 @@
+
+/*Iconos de Redes sociales*/
+
+@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css');
+
+.main-container {
+    display: flex;
+    min-height: 10vh;
+    justify-content: center;
+    align-items: center;
+    min-width: 32px;
+}
+
+.icon-list {
+    display: flex;
+    gap: 10px;
+    font-family: 'Calibri';
+}
+
+.item {
+    position: relative;
+    list-style: none;
+}
+
+.icon-box {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-style: preserve-3d;
+    transition: 0.5s ease-in-out;
+    color: rgb(1, 10, 166);
+    border: 1px solid rgba(111, 111, 111, 0.37);
+}
+
+.item:hover .icon-box {
+    transform: rotateX(60deg) perspective(550px) translateY(2px);
+    box-shadow: 0px 10px 2px rgba(0, 0, 0, 0.384);
+}
+
+.icon {
+    transition: transform .3s;
+}
+
+.item:hover .icon {
+    transform: translate3d(0px, 0px, 15px) rotateX(-75deg);
+}
+
+.count {
+    position: absolute;
+    left: 50%;
+    opacity: 0;
+    top: 0;
+    transition: .6s;
+    padding: 4px 10px;
+    border-radius: 5px;
+    visibility: hidden;
+    background: #33bbff;
+    color: rgb(4, 12, 13);
+    transform: translate(-50%, 0px);
+}
+
+.count::after {
+    content: '\F229';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    color: #161616;
+    font-family: 'bootstrap-icons';
+    transform: translate(-50%, 65%);
+}
+
+.item:hover .count {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translate(-50%, -50px);
+}
+
+.item a {
+    position: absolute;
+    bottom: 0;
+    opacity: 0;
+    left: 50%;
+    color: rgb(148, 3, 170);
+    transition: .5s;
+    padding: 10px 0;
+    visibility: hidden;
+    text-decoration: none;
+    transform: translate(-50%, 0);
+}
+
+.item:hover a {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 40px);
+}
+
+.item a:hover {
+    text-decoration: underline;
+}
+
+/*Termina iconos de reces sciales*/
+
+
+/*Boton para nosotros*/
+
+.main-container2 {
+    display: flex;
+    min-width: 25px;
+    min-height: 10vh;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .card2 {
+    width: 2000px;
+    height: 300px;
+    display: grid;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    border-radius: 1rem;
+    place-items: center;
+    letter-spacing: 0.2rem;
+    background: linear-gradient(320deg, rgb(230, 255, 1) 20%,rgb(0, 1, 87) 60%);
+  }
+  
+  .card2::before,
+  .card2::after {
+    content: '';
+    width: 20%;
+    height: 20%;
+    opacity: .3;
+    display: grid;
+    place-items: center;
+    font-size: .5rem;
+    position: absolute;
+    transition: 1s, font-size 1s ease-in-out .2s;
+    background: linear-gradient(320deg, rgba(0, 255, 255, 1) 30%, #06c978 60%);
+  }
+  
+  .card2::before {
+    left: 0;
+    top: 0;
+    border-radius: 1rem 0 100% 0;
+  }
+  
+  .card2::after {
+    right: 0;
+    bottom: 0;
+    border-radius: 100% 0 1rem 0;
+  }
+  
+  .card2:hover::before,
+  .card2:hover::after {
+    opacity: 1;
+    width: 100%;
+    height: 100%;
+    font-size: 2rem;
+    border-radius: 1rem;
+  }
+  
+  .card2:hover::after {
+    content: 'Mas información';
+    color: black;
+  }
+
+  /*Termina el boton para nosotros*/

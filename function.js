@@ -347,7 +347,7 @@ function generarMan(bits, tamaño, bitWidth, canvasWidth) {
 
   let currentX = 50;
   let currentY = canvas.height / 2;
-  const progressBar = document.getElementById('progress');
+  let progressBar = document.getElementById('progress');
 
   ctx.beginPath();
   ctx.moveTo(currentX, currentY);
@@ -478,7 +478,7 @@ function generarManS(bits, tamaño, bitWidth, canvasWidth) {
     ctx.lineWidth = 2;
     ctx.stroke();
 }*/
-
+/*
 //Dibuja la gráfica Unipolar
 function generarUnipolar(bits, tamaño, bitWidth, canvasWidth) {
   canvas.width = canvasWidth > 800 ? canvasWidth : 800;
@@ -493,6 +493,7 @@ function generarUnipolar(bits, tamaño, bitWidth, canvasWidth) {
   //inicializamos los valores de la grafica
   let currentX = 50;
   let currentY = (canvas.height / 2);
+  
   ctx.beginPath();
   ctx.moveTo(currentX, currentY);
   
@@ -515,6 +516,57 @@ function generarUnipolar(bits, tamaño, bitWidth, canvasWidth) {
     ctx.strokeStyle = "#007bff";
     ctx.lineWidth = 2;
     ctx.stroke();
+}*/
+//Dibuja la gráfica Unipolar
+function generarUnipolar(bits, tamaño, bitWidth, canvasWidth) {
+  canvas.width = canvasWidth > 800 ? canvasWidth : 800;
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawAxis(canvasWidth);
+  //grid = cuadricula
+  if(combobox.checked)
+  {
+    drawGrid(tamaño, bitWidth);
+  }
+  //inicializamos los valores de la grafica
+  let currentX = 50;
+  let currentY = (canvas.height / 2);
+  let progressBar = document.getElementById('progress');
+  ctx.beginPath();
+  ctx.moveTo(currentX, currentY);
+  
+  animateUnipolar(bits, currentX, currentY, bitWidth, bitHeight, progressBar);
+}
+function animateUnipolar(bits, currentX, currentY, bitWidth, bitHeight, progressBar)
+{
+  let i = 0;
+
+  function step() {
+    if (i >= bits.length) {
+      return;
+    }
+
+    const bit = bits[i];
+    // Mostrar etiqueta de bit en la parte superior
+    drawBitLabel(currentX, bit, bitWidth);
+    if (bit === "1") {
+      currentY = canvas.height/2 - bitHeight;//???????????????? bueno, funciona
+      ctx.lineTo(currentX, currentY);
+    }else{
+      currentY = canvas.height / 2;
+      ctx.lineTo(currentX, currentY);
+    }
+    currentX += bitWidth;
+    ctx.lineTo(currentX, currentY);
+    progressBar.style.width = ((i + 1) / bits.length) * 100 + '%';
+    ctx.strokeStyle = "#007bff";
+    ctx.lineWidth = 2;
+    ctx.stroke(); // Se pinta el segmento en cada paso
+
+    i++;
+    setTimeout(step, 300);
+  }
+  step();
 }
 
 // Dibujar gráfica B8ZS
@@ -729,3 +781,15 @@ function drawAxis(canvasWidth) {
   ctx.lineWidth = 1.5;
   ctx.stroke();
 }
+
+//MUSIC
+document.addEventListener("DOMContentLoaded", () => {
+  const audio = document.getElementById("musica");
+
+  // Intenta reproducir el audio
+  audio.play().then(() => {
+      console.log("Música reproduciéndose automáticamente.");
+  }).catch(error => {
+      console.log("La reproducción automática fue bloqueada. Se necesita interacción del usuario.");
+  });
+});

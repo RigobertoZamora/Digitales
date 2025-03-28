@@ -6,8 +6,9 @@
     <title>CODIFICACIONES</title>
     <link href="style.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="img/itcolima.svg">
+    <link rel="stylesheet" href="stylenosotros.css">
 </head>
-<body id="body">
+<body>
     <div id="textoInicial">
         <div>
           <img src="img/tecnm.png" alt="Imagen" class="logomexico">
@@ -25,89 +26,150 @@
         <h2 >REPRESENTACIÓN DE CODIFICACIONES DIGITAL A DIGITAL.  </h2> 
       </div>
       </td>
+      <header>
+        <button  onclick="changeImage()" id="toggle-dark-mode">Cambiar Tema</button>
+    </header>
       <table id="tablita">
         <tr>
             <td colspan="3"></td>
             <td rowspan="4" class="tdimg">
-                <img src="img/Captura de pantalla 2025-03-26 212827.png" alt="Imagen" class="tecno">
+                <img id="imagen-tema" src="img/Captura de pantalla 2025-03-26 212827.png" alt="Imagen">
             </td>
         </tr>
         <tr>
             <td class="centered-td">
+                <div class="cyber-tooltip-container">
                 <a href="Unipolar.html">
                 <button class="cyber-button">
                     <span data-text="UNIPOLAR" class="glitch">UNIPOLAR</span>
                     <span class="cyberpunk-border"></span>
                     <span class="scanline"></span>
                 </button></a>
+                <div class="hover-tooltip">
+                    <p class="tooltip-text">Convierte bits a señal digital con codificación unipolar<br></p>
+                    <img src="img/unipolar.png" class="tooltip-image" alt="Imagen">
+                </div>
+                </div>
             </td>
             <td class="centered-td">
+                <div class="cyber-tooltip-container">
                 <a href="RZ.html">
                 <button class="cyber-button">
                     <span data-text="RZ">RZ</span>
                     <span class="cyberpunk-border"></span>
                     <span class="scanline"></span>
                 </button></a>
+                <div class="hover-tooltip">
+                    <p class="tooltip-text">Convierte bits a señal digital con codificación rz<br></p>
+                    <img src="img/rz.png" class="tooltip-image" alt="Imagen">
+                </div>
+                </div>
             </td>
             <td class="centered-td">
+                <div class="cyber-tooltip-container">
                 <a href="AMI.html">
                   <button class="cyber-button">
                       <span data-text="AMI" class="glitch">AMI</span>
                       <span class="cyberpunk-border"></span>
                       <span class="scanline"></span>
                   </button></a> 
+                  <div class="hover-tooltip">
+                    <p class="tooltip-text">Convierte bits a señal digital con codificación AMI<br></p>
+                    <img src="img/AMIH.png" class="tooltip-image" alt="Imagen">
+                </div>
+                </div>
               </td>
         </tr>
         <tr>
             <td class="centered-td">
+                <div class="cyber-tooltip-container">
                 <a href="NRZ-I.html">
                 <button class="cyber-button">
                     <span data-text="NRZ-I" class="glitch">NRZ-I</span>
                     <span class="cyberpunk-border"></span>
                     <span class="scanline"></span>
                 </button></a>
+                <div class="hover-tooltip">
+                    <p class="tooltip-text">Convierte bits a señal digital con codificación NRZ-I<br></p>
+                    <img src="img/NRZ-I.png" class="tooltip-image" alt="Imagen">
+                </div>
+                </div>
             </td>
             <td class="centered-td">
+                <div class="cyber-tooltip-container">
                 <a href="B8ZS.html">
                 <button class="cyber-button">
                     <span data-text="B8ZS" class="glitch">B8ZS</span>
                     <span class="cyberpunk-border"></span>
                     <span class="scanline"></span>
                 </button></a>
+                <div class="hover-tooltip">
+                    <p class="tooltip-text">Convierte bits a señal digital con codificación B8ZS<br></p>
+                    <img src="img/B8ZS.png" class="tooltip-image" alt="Imagen">
+                </div>
+                </div>
             </td>
             <td class="centered-td">
+                <div class="cyber-tooltip-container">
                 <a href="NRZ-L.html">
                 <button class="cyber-button">
                     <span data-text="NRZ-L" class="glitch">NRZ-L</span>
                     <span class="cyberpunk-border"></span>
                     <span class="scanline"></span>
                 </button></a>
+                <div class="hover-tooltip">
+                    <p class="tooltip-text">Convierte bits a señal digital con codificación NRZ-L<br></p>
+                    <img src="img/NRZ-L.png" class="tooltip-image" alt="Imagen">
+                </div>
+                </div>
             </td>
         </tr>
         <tr>
             <td class="centered-td">
+             <div class="cyber-tooltip-container">
               <a href="ManchesterDif.html">
                 <button class="cyber-button">
                     <span data-text="Manchester DIFERENCIAL" class="glitch">Manchester DIFERENCIAL</span>
                     <span class="cyberpunk-border"></span>
                     <span class="scanline"></span>
                 </button></a>
+                <div class="hover-tooltip">
+                    <p class="tooltip-text">Convierte bits a señal digital con codificación Manchester diferencial<br></p>
+                    <img src="img/ManchesterDif.png" class="tooltip-image" alt="Imagen">
+                </div>
+                </div>
             </td>
             
             <td></td><!--ES UN ESPACIO ENTRE BOTONES-->
 
             <td class="centered-td">
+            <div class="cyber-tooltip-container">
               <a href="Manchester.html">
                 <button class="cyber-button">
                     <span data-text="Manchester" class="glitch">Manchester</span>
                     <span class="cyberpunk-border"></span>
                     <span class="scanline"></span>
                 </button></a> 
+                <div class="hover-tooltip">
+                    <p class="tooltip-text">Convierte bits a señal digital con codificación Manchester<br></p>
+                    <img src="img/ManchesterH.png" class="tooltip-image" alt="Imagen">
+                </div>
+                </div>
             </td>
         </tr>
     </table>
-      <nav class="navbar">
-          <h1 id="textonav">Desarrolladores: Rodolfo Vega,Rigo Zamora,Moises Urbina,Elias Melendez</h1>
-      </nav>
+    <audio id="musiquita" src="musica/Mi video1.mp3" controls autoplay loop></audio>
+    <nav class="navbar">
+        <h1 id="textonav"></h1>
+        <body>
+          <div class="main-container2">
+            <a href="nosotros.html">
+            <div class="card2">Desarrolladores: Rodolfo Vega,Rigoberto Zamora,Moises Urbina,Elias Melendez</div>
+        </div>
+        </body>
+    </nav>
+    <script src="function.js"></script>
+    <script src="no.js"></script>
+    
 </body>
 </html>

@@ -1,8 +1,47 @@
+#musiquita
+{
+  position: fixed;
+  bottom: 55px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #000000;
+  color: #ffffff;
+  transition: background-color 0.3s, color 0.3s;
+  zoom: 90%;
+}
+
+body.dark-mode {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+button {
+  margin: 1px;
+  cursor: pointer;
+  border: none;
+  background-color: #007BFF;
+  color: #ffffff;
+  
+    width: 9%;
+    bottom: 1px;
+    
+   
+    
+}
+button:hover {
+  background-color: #0056b3;
+}/*
 #body
 {
  background-color: rgb(0, 0, 0);
  zoom: 90%;
-}
+}*/
 #textoInicial
 {
   background: linear-gradient(to right, rgb(172, 172, 35), rgb(3, 19, 87));
@@ -47,9 +86,7 @@
     margin-right: 20px;
   }
   .tecno{
-    width: 470px;  
-    opacity: 0.8;
-    animation: pulso 1.5s infinite alternate ease-in-out;
+    width: 450px;
   }
   .tdimg
   {
@@ -292,7 +329,94 @@ h1{
   transform: scale(0.95);
 }
 
+/*TOOLTIPS DE INDEX EN CADA BOTON*-----------------*/
 
+.cyber-tooltip-container:hover .hover-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) scale(1);
+}
+
+  /* Contenedor para posicionamiento relativo */
+.cyber-tooltip-container {
+  position: relative;
+  display: inline-block;
+}
+  /* Estilos para el tooltip */
+  .hover-tooltip  {
+  position: absolute;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  z-index: 999;
+  background: #000;
+  border: 1px solid #0ff;
+  padding: 15px;
+  width: 200px;
+  bottom: 120%; /* Posición por encima del botón */
+  left: 50%;
+  transform: translateX(-50%) scale(0.95);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+  filter: drop-shadow(0 0 5px #0ff);
+}
+  .hover-tooltip::before {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 10px 10px 0;
+      border-style: solid;
+      border-color: #000 transparent transparent;
+  }
+  
+  .cyber-button:hover .hover-tooltip {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(calc(-50% + var(--x, 0px)), calc(-100% + var(--y, -10px)));
+  }
+  
+  .tooltip-text {
+      color: #0ff;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      margin: 0 0 10px 0;
+      text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+  }
+  
+  .tooltip-image {
+      width: 100%;
+      height: auto;
+      border: 1px solid #0ff;
+      filter: grayscale(100%) contrast(150%);
+  }
+  
+  /* Asegurar posición relativa en el botón */
+  .cyber-button {
+      position: relative;
+  }
+  
+  /* Efecto scanline para el tooltip */
+  .hover-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 8px;
+  border-style: solid;
+  border-color: #000 transparent transparent transparent;
+}
+
+  
+  @keyframes scanline {
+      from { transform: translateY(-100%); }
+      to { transform: translateY(100%); }
+  }
+  .hover-tooltip {
+  animation: neonPulse 1.5s infinite alternate;
+}
 
 
 
