@@ -44,7 +44,25 @@
     width: 90px;  
     margin-right: 20px;
   }
-  
+  #descri{
+    color: rgb(255, 255, 255);
+    font-family: 'Verdana', Times, serif;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: left;
+  }
+  #cuadradito{
+    
+    background-color: #000000;
+    border-radius: 10px;
+    border: 3px solid rgb(255, 255, 255);
+    box-shadow:
+    0 0 15px #0ff,
+    inset 0 0 15px #0ff;
+
+
+  }
+
   .navbar {
     background-color: #000000;
     color: rgb(255, 255, 255);

@@ -21,7 +21,7 @@
         </div>
       </div>
       <div id="titulo">
-        <h2>CODIFICACIÓN MANCHESTER DIFERENCIAL</h2> 
+        <h2>CODIFICACIÓN HDB3</h2> 
       </div>
       <div class="container">    
 <div id="lineainbt">
@@ -30,11 +30,11 @@
           <label class="label">Ingresa una cadena de bits:</label>
         </div>
         <p id="mensajeError" style="color: rgb(209, 91, 91); position: fixed; transform: translate(10px, 60px);"></p>
-          <button class="cyber-buttoncito" onclick="IngresarBits('manDif')">
+          <button class="cyber-buttoncito" onclick="IngresarBits('HDB3')">
               <span data-text="AMI" class="glitch">Generar Grafica</span>
               <span class="cyberpunk-border"></span>  
           </button>
-          <button class="cyber-buttoncito" onclick="generarRandom('manDif')">
+          <button class="cyber-buttoncito" onclick="generarRandom('HDB3')">
             <span data-text="AMI" class="glitch">Generar Grafica Aleatoria</span>
             <span class="cyberpunk-border"></span>
         </button>
@@ -57,15 +57,16 @@
         <div id="cuadradito"> 
           <h2 id="descri">
            
-            En la codificación Manchester diferencial, la inversión en la mitad
-            del intervalo de bit se usa para sincronización, pero la presencia o
-            ausencia de una transición adicional al principio de cada intervalo se
-            usa para identificar el bit. Una transición significa un 0 binario,
-            mientras que la ausencia de transición significa un 1 binario. El método
-            Manchester diferencial necesita dos cambios de señal para representar
-            el 0 binario, pero solamente uno para representar el 1 binario.
-            
+            Esta convención, denominada HDB3, introduce cambios
+            dentro del patrón AMI bipolar cada vez que se encuentran
+            cuatro ceros consecutivos en lugar de esperar por los ocho
+            del método B8ZS. Aunque el nombre es HDB3, el patrón
+            cambia cada vez que se encuentra cuatro ceros seguidos.
 
+            En HDB3 si hay cuatro ceros seguidos, se cambia el patrón
+            usando una de las cuatro formas basadas en la polaridad
+            del 1 anterior y el número de unos desde la última sustitución.
+            
           </h2>
 
         </div>

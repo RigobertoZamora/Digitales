@@ -122,7 +122,6 @@ button:hover {
     width: 50px; 
     height: 40px; 
     background: #bdc3c7;
-    -webkit-transform: skew(-20deg); 
     padding-left: 0px;
     background-color: aqua;
     
@@ -417,13 +416,4 @@ h1{
   .hover-tooltip {
   animation: neonPulse 1.5s infinite alternate;
 }
-
-
-
-
-
-
-
-
-
 

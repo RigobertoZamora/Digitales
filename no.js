@@ -18,4 +18,4 @@ function changeImage() {
       }
       image.style.opacity = .9; // Vuelve a mostrar la imagen
   }, 235); // Espera 500 ms (el mismo tiempo que la transición)
-}
+}    
